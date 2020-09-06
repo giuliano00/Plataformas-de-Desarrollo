@@ -136,12 +136,14 @@ namespace ConsoleApp2
             */
             //---------------------------------------------------------------
 
+
             static int pedirAño(string mensaje)
             {
                 Console.WriteLine(mensaje);
                 string valor = Console.ReadLine();
                 return int.Parse(valor);
             }
+
 
             static bool calcularAnioBisiesto(int a)
             {
@@ -158,6 +160,7 @@ namespace ConsoleApp2
                 Console.WriteLine(calcularAnioBisiesto(pedirAño("Ingrese su año de nacimiento")));
 
             
+
         }
     }
 }
