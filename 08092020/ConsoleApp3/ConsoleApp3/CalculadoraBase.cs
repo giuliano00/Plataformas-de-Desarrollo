@@ -4,9 +4,12 @@ using System.Text;
 
 namespace ConsoleApp3
 {
-    class CalculadoraBase
+   public abstract class CalculadoraBase
     {
-        
+        public int Restar (int valor1,int valor2)
+        {
+            return valor1 - valor2;
+        }
 
 
     }

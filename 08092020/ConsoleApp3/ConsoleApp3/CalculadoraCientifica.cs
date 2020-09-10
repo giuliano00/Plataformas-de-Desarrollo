@@ -6,9 +6,9 @@ namespace ConsoleApp3
 {
     class CalculadoraCientifica : Calculadora
     {
-        public int Potencia(int valor,int exponente)
+        public double Potencia(int valor,int exponente)
         {
-
+            return Math.Pow(valor, exponente);
         }
     }
     
