@@ -15,5 +15,9 @@ namespace parcial1
             this.Usuario = Usuario;
 
         }
+
+        public Recursos()
+        {
+        }
     }
 }
