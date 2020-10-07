@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace parcial1
 {
-   class tareas
+   public class tareas
     {
         public string Titulo { get; set; }
 
@@ -25,7 +26,7 @@ namespace parcial1
             this.Estado = Estado;
 
         }
-
+        public tareas() {}
 
 
     }
