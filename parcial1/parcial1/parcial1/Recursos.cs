@@ -7,13 +7,16 @@ namespace parcial1
 {
      public class Recursos
     {
-        public string Nombre { get; set; }
         [Key]
+        public int idrecurso { get; set; }
+        public string Nombre { get; set; }
+       public int idusuario { get; set; }
         public Usuarios Usuario { get; set; }
-        public Recursos(string Nombre, Usuarios Usuario)
+        public Recursos(string Nombre, Usuarios Usuario,int idrecurso)
         {
             this.Nombre = Nombre;
             this.Usuario = Usuario;
+            this.idrecurso = idrecurso;
 
         }
 

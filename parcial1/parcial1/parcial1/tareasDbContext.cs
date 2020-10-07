@@ -19,7 +19,9 @@ namespace parcial1
             modelBuilder.Entity<tareas>().ToTable("tareas");
         }
 
-        public DbSet<Usuarios> Usuarios { get; }
-
+        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<tareas> tareas { get; set; }
+        public DbSet<Recursos> recursos { get; set; }
+        public DbSet<Detalles> detalles { get; set; }
     }
 }
