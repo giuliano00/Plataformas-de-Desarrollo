@@ -8,17 +8,17 @@ namespace parcial1
     public class Detalles
     {
         [Key]
-        public int iddetalle { get; set; }
+        public int Iddetalle { get; set; }
         public DateTime Fecha { get; set; }
 
         public string Tiempo { get; set; }
 
-        public int idrecurso { get; set; }
+        public int Idrecurso { get; set; }
         public Recursos Recurso { get; set; }
-        public int idtarea { get; set; }
-        public tareas Tarea { get; set; }
+        public int Idtarea { get; set; }
+        public Tareas Tarea { get; set; }
 
-        public Detalles(DateTime Fecha, string Tiempo, Recursos Recurso, tareas Tarea)
+        public Detalles(DateTime Fecha, string Tiempo, Recursos Recurso, Tareas Tarea)
         {
             this.Fecha = Fecha;
             this.Tiempo = Tiempo;

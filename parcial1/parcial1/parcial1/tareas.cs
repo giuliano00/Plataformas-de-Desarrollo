@@ -6,31 +6,32 @@ using System.Text;
 
 namespace parcial1
 {
-   public class tareas
+   public class Tareas
     {
         [Key]
-        public int idtarea { get; set; }
+        public int Idtarea { get; set; }
         public string Titulo { get; set; }
 
         public DateTime Vencimiento { get; set; }
 
         public int Estimacion { get; set; }
 
-        public int idrecurso { get; set; }
+        public int Idrecurso { get; set; }
         public Recursos Responsable { get; set; }
 
         public bool Estado { get; set; }
 
-        public tareas(string Titulo, DateTime Vencimiento, int Estimacion, Recursos Responsable, bool Estado, int idtarea)
+        public 
+            Tareas(string Titulo, DateTime Vencimiento, int Estimacion, Recursos Responsable, bool Estado, int Idtarea)
         {
             this.Titulo = Titulo;
             this.Vencimiento = Vencimiento;
             this.Estimacion = Estimacion;
             this.Responsable = Responsable;
             this.Estado = Estado;
-            this.idtarea = idtarea;
+            this.Idtarea = Idtarea;
         }
-        public tareas() {}
+        public Tareas() {}
 
 
     }

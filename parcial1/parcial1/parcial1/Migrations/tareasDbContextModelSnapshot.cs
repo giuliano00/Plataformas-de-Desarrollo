@@ -7,8 +7,8 @@ using parcial1;
 
 namespace parcial1.Migrations
 {
-    [DbContext(typeof(tareasDbContext))]
-    partial class tareasDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TareasDbContext))]
+    partial class TareasDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -18,82 +18,62 @@ namespace parcial1.Migrations
 
             modelBuilder.Entity("parcial1.Detalles", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Iddetalle")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Recursoiduser")
+                    b.Property<int>("Idrecurso")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Tareaidtarea")
+                    b.Property<int>("Idtarea")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("RecursoIdrecurso")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TareaIdtarea")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Tiempo")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("idrecurso")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Iddetalle");
 
-                    b.Property<int>("idtarea")
-                        .HasColumnType("INTEGER");
+                    b.HasIndex("RecursoIdrecurso");
 
-                    b.HasKey("id");
+                    b.HasIndex("TareaIdtarea");
 
-                    b.HasIndex("Recursoiduser");
-
-                    b.HasIndex("Tareaidtarea");
-
-                    b.ToTable("detalles");
+                    b.ToTable("Tetalles");
                 });
 
             modelBuilder.Entity("parcial1.Recursos", b =>
                 {
-                    b.Property<int>("iduser")
+                    b.Property<int>("Idrecurso")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Idusuario")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UsuarioPK")
+                    b.Property<int?>("UsuarioIdusuario")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("idusuario")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Idrecurso");
 
-                    b.HasKey("iduser");
+                    b.HasIndex("UsuarioIdusuario");
 
-                    b.HasIndex("UsuarioPK");
-
-                    b.ToTable("recursos");
+                    b.ToTable("Tecursos");
                 });
 
-            modelBuilder.Entity("parcial1.Usuarios", b =>
+            modelBuilder.Entity("parcial1.Tareas", b =>
                 {
-                    b.Property<int>("UsuarioPK")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Clave")
-                        .IsRequired()
-                        .HasColumnName("Password")
-                        .HasColumnType("char(20");
-
-                    b.Property<string>("User")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(15);
-
-                    b.HasKey("UsuarioPK");
-
-                    b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("parcial1.tareas", b =>
-                {
-                    b.Property<int>("idtarea")
+                    b.Property<int>("Idtarea")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -103,7 +83,10 @@ namespace parcial1.Migrations
                     b.Property<int>("Estimacion")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Responsableiduser")
+                    b.Property<int>("Idrecurso")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ResponsableIdrecurso")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Titulo")
@@ -112,39 +95,55 @@ namespace parcial1.Migrations
                     b.Property<DateTime>("Vencimiento")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("idrecurso")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Idtarea");
 
-                    b.HasKey("idtarea");
-
-                    b.HasIndex("Responsableiduser");
+                    b.HasIndex("ResponsableIdrecurso");
 
                     b.ToTable("tareas");
+                });
+
+            modelBuilder.Entity("parcial1.Usuarios", b =>
+                {
+                    b.Property<int>("Idusuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Clave")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Idusuario");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("parcial1.Detalles", b =>
                 {
                     b.HasOne("parcial1.Recursos", "Recurso")
                         .WithMany()
-                        .HasForeignKey("Recursoiduser");
+                        .HasForeignKey("RecursoIdrecurso");
 
-                    b.HasOne("parcial1.tareas", "Tarea")
+                    b.HasOne("parcial1.Tareas", "Tarea")
                         .WithMany()
-                        .HasForeignKey("Tareaidtarea");
+                        .HasForeignKey("TareaIdtarea");
                 });
 
             modelBuilder.Entity("parcial1.Recursos", b =>
                 {
                     b.HasOne("parcial1.Usuarios", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioPK");
+                        .HasForeignKey("UsuarioIdusuario");
                 });
 
-            modelBuilder.Entity("parcial1.tareas", b =>
+            modelBuilder.Entity("parcial1.Tareas", b =>
                 {
                     b.HasOne("parcial1.Recursos", "Responsable")
                         .WithMany()
-                        .HasForeignKey("Responsableiduser");
+                        .HasForeignKey("ResponsableIdrecurso");
                 });
 #pragma warning restore 612, 618
         }

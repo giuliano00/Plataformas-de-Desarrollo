@@ -11,21 +11,22 @@ namespace parcial1
             Console.WriteLine("Hello World!");
             Consultar();
             Actualizar();
-
+            Borrado();
+            Insertar();
             static void Borrado()
             {
-                var ctx = new tareasDbContext();
-                var usuario = ctx.Usuarios.Where(i => i.idusuario == 1).Single();
+                var ctx = new TareasDbContext();
+                var usuario = ctx.Usuarios.Where(i => i.Idusuario == 1).Single();
                 ctx.Usuarios.Remove(usuario);
                 ctx.SaveChanges();
             }
 
             static void Actualizar()
             {
-                var ctx = new tareasDbContext();
+                var ctx = new TareasDbContext();
 
-                var lista = ctx.Usuarios.Where(i => i.idusuario == 1).ToList();
-                lista[0].nombre = "rodo";
+                var lista = ctx.Usuarios.Where(i => i.Idusuario == 1).ToList();
+                lista[0].Nombre = "rodo";
 ;
                 ctx.SaveChanges();
             }
@@ -34,27 +35,27 @@ namespace parcial1
 
             static void Consultar()
             {
-                var ctx = new tareasDbContext();
+                var ctx = new TareasDbContext();
                 var lista = ctx.Usuarios.ToList();
                 foreach (var item in lista)
                 {
-                    Console.WriteLine($"nombre: {item.clave}({ item.clave})");
+                    Console.WriteLine($"nombre: {item.Clave}({ item.Clave})");
                 }
 
             }
 
             static void Insertar()
             {
-                var ctx = new tareasDbContext();
+                var ctx = new TareasDbContext();
 
-                ctx.Set<Usuarios>().Add(new Usuarios { idusuario = 3, nombre = "fer", clave = "1234" });
-                ctx.Set<Usuarios>().Add(new Usuarios { idusuario = 2, nombre = "fer", clave = "1234" });
-                ctx.Set<Usuarios>().Add(new Usuarios { idusuario = 1, nombre = "fer", clave = "1234" });
+                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 3, Nombre = "fer", Clave = "1234" });
+                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 2, Nombre = "fer", Clave = "1234" });
+                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 1, Nombre = "fer", Clave = "1234" });
 
-                ctx.Set<tareas>().Add(new tareas("Ejercicio1", new DateTime(2020, 1, 20), 10, new Recursos(), false, 1));
-                ctx.Set<tareas>().Add(new tareas("Ejercicio2", new DateTime(2020, 2, 21), 11, new Recursos(), false, 2));
-                ctx.Set<tareas>().Add(new tareas("Ejercicio3", new DateTime(2020, 3, 22), 12, new Recursos(), false, 3));
-                ctx.Set<tareas>().Add(new tareas("Ejercicio4", new DateTime(2020, 4, 23), 13, new Recursos(), false, 4));
+                ctx.Set<Tareas>().Add(new Tareas("Ejercicio1", new DateTime(2020, 1, 20), 10, new Recursos(), false, 1));
+                ctx.Set<Tareas>().Add(new Tareas("Ejercicio2", new DateTime(2020, 2, 21), 11, new Recursos(), false, 2));
+                ctx.Set<Tareas>().Add(new Tareas("Ejercicio3", new DateTime(2020, 3, 22), 12, new Recursos(), false, 3));
+                ctx.Set<Tareas>().Add(new Tareas("Ejercicio4", new DateTime(2020, 4, 23), 13, new Recursos(), false, 4));
                 ctx.SaveChanges();
 
             }

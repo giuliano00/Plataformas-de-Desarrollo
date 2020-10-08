@@ -12,25 +12,25 @@ namespace parcial1
 
 
         [Key]
-        public int idusuario { get; set; }
+        public int Idusuario { get; set; }
 
         [MaxLength(50)]  // maximo de longitud de caracteres 
         [MinLength(10)]  // minimo de longitud de caracteres 
-        public String nombre { get; set; }
+        public String Nombre { get; set; }
         [Required] //que no acepta nulos
                    //  [Column("Password", TypeName = "char(20)")]
 
-        public String clave { get; set; }
+        public String Clave { get; set; }
 
 
 
         public Usuarios() { }  //constructor implicito 
 
-        public Usuarios(int idusuario, string nombre, string clave)
+        public Usuarios(int Idusuario, string Nombre, string Clave)
         {
-            this.idusuario = idusuario;
-            this.nombre = nombre;
-            this.clave = clave;
+            this.Idusuario = Idusuario;
+            this.Nombre = Nombre;
+            this.Clave = Clave;
         }
 
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace parcial1
 {
-    public class tareasDbContext : DbContext
+    public class TareasDbContext : DbContext
     {
        
 
@@ -16,12 +16,12 @@ namespace parcial1
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
-            modelBuilder.Entity<tareas>().ToTable("tareas");
+            modelBuilder.Entity<Tareas>().ToTable("tareas");
         }
 
         public DbSet<Usuarios> Usuarios { get; set; }
-        public DbSet<tareas> tareas { get; set; }
-        public DbSet<Recursos> recursos { get; set; }
-        public DbSet<Detalles> detalles { get; set; }
+        public DbSet<Tareas> Tareas { get; set; }
+        public DbSet<Recursos> Tecursos { get; set; }
+        public DbSet<Detalles> Tetalles { get; set; }
     }
 }
