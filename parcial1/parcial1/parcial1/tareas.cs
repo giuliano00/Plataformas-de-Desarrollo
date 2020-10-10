@@ -22,7 +22,7 @@ namespace parcial1
         public bool Estado { get; set; }
 
         public 
-            Tareas(string Titulo, DateTime Vencimiento, int Estimacion, Recursos Responsable, bool Estado, int Idtarea)
+            Tareas(string Titulo, DateTime Vencimiento, int Estimacion, Recursos Responsable, bool Estado, int Idtarea )
         {
             this.Titulo = Titulo;
             this.Vencimiento = Vencimiento;

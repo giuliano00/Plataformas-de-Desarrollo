@@ -14,12 +14,10 @@ namespace parcial1
         [Key]
         public int Idusuario { get; set; }
 
-        [MaxLength(50)]  // maximo de longitud de caracteres 
-        [MinLength(10)]  // minimo de longitud de caracteres 
+        [MaxLength(50)]  
+        [MinLength(10)]  
         public String Nombre { get; set; }
-        [Required] //que no acepta nulos
-                   //  [Column("Password", TypeName = "char(20)")]
-
+        [Required]
         public String Clave { get; set; }
 
 

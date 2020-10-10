@@ -11,12 +11,15 @@ namespace parcial1
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
             optionsBuilder.UseSqlite("Data Source=tareas.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
             modelBuilder.Entity<Tareas>().ToTable("tareas");
+            modelBuilder.Entity<Recursos>().ToTable("Recurso");
+            modelBuilder.Entity<Detalles>().ToTable("Detalle");
         }
 
         public DbSet<Usuarios> Usuarios { get; set; }

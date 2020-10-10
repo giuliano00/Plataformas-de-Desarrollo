@@ -12,11 +12,13 @@ namespace parcial1
         public string Nombre { get; set; }
        public int Idusuario { get; set; }
         public Usuarios Usuario { get; set; }
-        public Recursos(string Nombre, Usuarios Usuario,int idrecurso)
+        public Recursos(string Nombre, Usuarios Usuario,int idrecurso,int Idusuario)
         {
             this.Nombre = Nombre;
             this.Usuario = Usuario;
             this.Idrecurso = idrecurso;
+            this.Idusuario = Idusuario;
+
 
         }
 
