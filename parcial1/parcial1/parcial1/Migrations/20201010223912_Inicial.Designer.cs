@@ -9,8 +9,8 @@ using parcial1;
 namespace parcial1.Migrations
 {
     [DbContext(typeof(TareasDbContext))]
-    [Migration("20201010202049_Inicial1")]
-    partial class Inicial1
+    [Migration("20201010223912_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
