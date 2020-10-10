@@ -8,30 +8,56 @@ namespace parcial1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Consultar();
-            Actualizar();
-            Borrado();
+            Console.WriteLine("Agregando registros..");
             Insertar();
+            Console.WriteLine("Consultando usuarios..");
+            Consultar();
+            Console.WriteLine("Actualizando usuario..");
+            Actualizar();
+            Console.WriteLine("Consultando usuarios..");
+            Consultar(); //Consultar datos con el actualizado
+            Console.WriteLine("Eliminando registros..");
+            Borrado();
+
             static void Borrado()
             {
                 var ctx = new TareasDbContext();
-                var usuario = ctx.Usuarios.Where(i => i.Idusuario == 1).Single();
-                ctx.Usuarios.Remove(usuario);
+                //USUARIOS
+                //var usuario = ctx.Usuarios.Where(i => i.Idusuario == 1).Single();
+                var usuarios = ctx.Usuarios.ToList(); //Listar todos los usuarios
+
+                foreach (var usuario in usuarios) //Recorrerlos y eliminarlos
+                {
+                    ctx.Usuarios.Remove(usuario);
+                }
+
+                //RECURSO
+                var recursos = ctx.Recursos.ToList(); //Listar todos los recursos
+
+                foreach (var recurso in recursos) //Recorrerlos y eliminarlos
+                {
+                    ctx.Recursos.Remove(recurso);
+                }
+
+                //TAREAS
+                var tareas = ctx.Tareas.ToList(); //Listar todas las tareas
+
+                foreach (var tarea in tareas) //Recorrerlas y eliminarlos
+                {
+                    ctx.Tareas.Remove(tarea);
+                }
+
                 ctx.SaveChanges();
             }
 
             static void Actualizar()
             {
                 var ctx = new TareasDbContext();
-
-                var lista = ctx.Usuarios.Where(i => i.Idusuario == 1).ToList();
-                lista[0].Nombre = "rodo";
-;
+                //var lista = ctx.Usuarios.Where(i => i.Idusuario == 1).ToList();
+                var lista = ctx.Usuarios.FirstOrDefault(); //Obtener el primer registro
+                lista.Nombre = "rodo"; ;
                 ctx.SaveChanges();
             }
-
-        
 
             static void Consultar()
             {
@@ -39,36 +65,57 @@ namespace parcial1
                 var lista = ctx.Usuarios.ToList();
                 foreach (var item in lista)
                 {
-                    Console.WriteLine($"nombre: {item.Clave}({ item.Clave})");
+                    Console.WriteLine($"nombre: {item.Nombre}({ item.Clave})");
                 }
 
             }
 
             static void Insertar()
             {
-                var ctx = new TareasDbContext();
+                //USUARIOS
+                var ctxUsuarios = new TareasDbContext();
+                ctxUsuarios.Add(new Usuarios { Nombre = "Pepito1", Clave = "123" });
+                ctxUsuarios.Add(new Usuarios { Nombre = "Pepito2", Clave = "1234" });
+                ctxUsuarios.SaveChanges(); //Agregar usuarios a la BD
 
-                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 3, Nombre = "fer", Clave = "1234" });
-                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 2, Nombre = "fer", Clave = "1234" });
-                ctx.Set<Usuarios>().Add(new Usuarios { Idusuario = 1, Nombre = "fer", Clave = "1234" });
+                //Obtener usuarios agregados
+                var ctxConsulta = new TareasDbContext();
+                var listaUsuarios = ctxConsulta.Usuarios.ToList();
 
-                ctx.Set<Tareas>().Add(new Tareas("Ejercicio1", new DateTime(2020, 1, 20), 10, new Recursos(), false, 1));
-                ctx.Set<Tareas>().Add(new Tareas("Ejercicio2", new DateTime(2020, 2, 21), 11, new Recursos(), false, 2));
-                ctx.Set<Tareas>().Add(new Tareas("Ejercicio3", new DateTime(2020, 3, 22), 12, new Recursos(), false, 3));
-                ctx.Set<Tareas>().Add(new Tareas("Ejercicio4", new DateTime(2020, 4, 23), 13, new Recursos(), false, 4));
-                ctx.SaveChanges();
+                //RECURSO
+                var ctxRecurso = new TareasDbContext();
+                var nroRecurso = 0;
+
+                //Va agregar un recurso por usuario
+                foreach (var usuario in listaUsuarios)
+                {
+                    nroRecurso++; //Incrementa el nro del recurso
+                    ctxRecurso.Add(new Recursos { Idusuario = usuario.Idusuario, Nombre = String.Format("recurso {0}", nroRecurso) });
+                }
+                ctxRecurso.SaveChanges(); //Agregar recursos a la BD
+
+                //Obtener recursos agregados
+                ctxConsulta = new TareasDbContext();
+                var listaRecurso = ctxConsulta.Recursos.ToList();
+
+                //TAREAS
+                var ctxTareas = new TareasDbContext();
+                var nroTarea = 0;
+
+                //Va agregar una tarea por recurso
+                foreach (var recurso in listaRecurso)
+                {
+                    nroTarea++; //Incrementa el nro de la tarea
+                    ctxTareas.Add(new Tareas { Titulo = String.Format("Tarea {0}", nroTarea), Vencimiento = new DateTime(2020, 10, 10), Estimacion = 1, Idrecurso = recurso.Idrecurso, Estado = true });
+                }
+
+                ctxTareas.SaveChanges(); //Agregar tareas a la BD
 
             }
             //add-Migration "Inicial"   Update-Database
 
 
-           // Usuarios u = new Usuarios("giu", "123");
-           // Recursos r = new Recursos("giuliano", u);
-
-           
-
-            
         }
-         
+
     }
 }

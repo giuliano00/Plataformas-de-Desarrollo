@@ -9,8 +9,8 @@ using parcial1;
 namespace parcial1.Migrations
 {
     [DbContext(typeof(TareasDbContext))]
-    [Migration("20201008002717_Inicial")]
-    partial class Inicial
+    [Migration("20201010202049_Inicial1")]
+    partial class Inicial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,7 @@ namespace parcial1.Migrations
 
                     b.HasIndex("TareaIdtarea");
 
-                    b.ToTable("Tetalles");
+                    b.ToTable("Detalle");
                 });
 
             modelBuilder.Entity("parcial1.Recursos", b =>
@@ -70,7 +70,7 @@ namespace parcial1.Migrations
 
                     b.HasIndex("UsuarioIdusuario");
 
-                    b.ToTable("Tecursos");
+                    b.ToTable("Recurso");
                 });
 
             modelBuilder.Entity("parcial1.Tareas", b =>

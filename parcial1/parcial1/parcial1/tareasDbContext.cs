@@ -24,7 +24,7 @@ namespace parcial1
 
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Tareas> Tareas { get; set; }
-        public DbSet<Recursos> Tecursos { get; set; }
+        public DbSet<Recursos> Recursos { get; set; }
         public DbSet<Detalles> Tetalles { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace parcial1.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Inicial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace parcial1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tecursos",
+                name: "Recurso",
                 columns: table => new
                 {
                     Idrecurso = table.Column<int>(nullable: false)
@@ -33,9 +33,9 @@ namespace parcial1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tecursos", x => x.Idrecurso);
+                    table.PrimaryKey("PK_Recurso", x => x.Idrecurso);
                     table.ForeignKey(
-                        name: "FK_Tecursos_Usuarios_UsuarioIdusuario",
+                        name: "FK_Recurso_Usuarios_UsuarioIdusuario",
                         column: x => x.UsuarioIdusuario,
                         principalTable: "Usuarios",
                         principalColumn: "Idusuario",
@@ -59,15 +59,15 @@ namespace parcial1.Migrations
                 {
                     table.PrimaryKey("PK_tareas", x => x.Idtarea);
                     table.ForeignKey(
-                        name: "FK_tareas_Tecursos_ResponsableIdrecurso",
+                        name: "FK_tareas_Recurso_ResponsableIdrecurso",
                         column: x => x.ResponsableIdrecurso,
-                        principalTable: "Tecursos",
+                        principalTable: "Recurso",
                         principalColumn: "Idrecurso",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tetalles",
+                name: "Detalle",
                 columns: table => new
                 {
                     Iddetalle = table.Column<int>(nullable: false)
@@ -81,15 +81,15 @@ namespace parcial1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tetalles", x => x.Iddetalle);
+                    table.PrimaryKey("PK_Detalle", x => x.Iddetalle);
                     table.ForeignKey(
-                        name: "FK_Tetalles_Tecursos_RecursoIdrecurso",
+                        name: "FK_Detalle_Recurso_RecursoIdrecurso",
                         column: x => x.RecursoIdrecurso,
-                        principalTable: "Tecursos",
+                        principalTable: "Recurso",
                         principalColumn: "Idrecurso",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tetalles_tareas_TareaIdtarea",
+                        name: "FK_Detalle_tareas_TareaIdtarea",
                         column: x => x.TareaIdtarea,
                         principalTable: "tareas",
                         principalColumn: "Idtarea",
@@ -97,36 +97,36 @@ namespace parcial1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_tareas_ResponsableIdrecurso",
-                table: "tareas",
-                column: "ResponsableIdrecurso");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tecursos_UsuarioIdusuario",
-                table: "Tecursos",
-                column: "UsuarioIdusuario");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tetalles_RecursoIdrecurso",
-                table: "Tetalles",
+                name: "IX_Detalle_RecursoIdrecurso",
+                table: "Detalle",
                 column: "RecursoIdrecurso");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tetalles_TareaIdtarea",
-                table: "Tetalles",
+                name: "IX_Detalle_TareaIdtarea",
+                table: "Detalle",
                 column: "TareaIdtarea");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recurso_UsuarioIdusuario",
+                table: "Recurso",
+                column: "UsuarioIdusuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tareas_ResponsableIdrecurso",
+                table: "tareas",
+                column: "ResponsableIdrecurso");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tetalles");
+                name: "Detalle");
 
             migrationBuilder.DropTable(
                 name: "tareas");
 
             migrationBuilder.DropTable(
-                name: "Tecursos");
+                name: "Recurso");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

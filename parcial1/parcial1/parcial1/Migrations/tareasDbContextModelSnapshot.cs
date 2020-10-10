@@ -46,7 +46,7 @@ namespace parcial1.Migrations
 
                     b.HasIndex("TareaIdtarea");
 
-                    b.ToTable("Tetalles");
+                    b.ToTable("Detalle");
                 });
 
             modelBuilder.Entity("parcial1.Recursos", b =>
@@ -68,7 +68,7 @@ namespace parcial1.Migrations
 
                     b.HasIndex("UsuarioIdusuario");
 
-                    b.ToTable("Tecursos");
+                    b.ToTable("Recurso");
                 });
 
             modelBuilder.Entity("parcial1.Tareas", b =>
