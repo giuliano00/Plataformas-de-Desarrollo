@@ -8,35 +8,51 @@ namespace BlazorApp1.Data
 {
     public class UsuarioService
     {
-        private DataContext context;
+        private TareasDbContext ctx;
 
-        public UsuarioService(DataContext _context)
+        public UsuarioService(TareasDbContext _context)
         {
-            context = _context;
+            ctx = _context;
         }
 
-        public async Task<Usuario> Get(int id)
+       
+        public async Task<List<Usuario>> ListUser()
         {
-            return await context.Usuarios.Where(i => i.Id == id).SingleAsync();
+            return await ctx.Usuarios.ToListAsync();
         }
 
-        public async Task<List<Usuario>> GetAll()
+        public async Task<Usuario> SelectUser(int id)
         {
-            return await context.Usuarios.ToListAsync();
+            return await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
         }
 
-        public async Task<Usuario> Save(Usuario value)
+        public async Task<Usuario> SaveUser(Usuario value)
         {
-            if (value.Id == 0)
+            if (value.UsuarioPK == 0)
             {
-                await context.Usuarios.AddAsync(value);
+                await ctx.Usuarios.AddAsync(value);
             }
             else
             {
-                context.Usuarios.Update(value);
+                ctx.Usuarios.Update(value);
             }
-            //await context.SaveChangesAsync();//error en save Changes
+
+            await ctx.SaveChangesAsync();
+
             return value;
+
+        }
+
+
+        public async Task<bool> DeleteUser(int id)
+        {
+            Usuario user = await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
+
+            ctx.Usuarios.Remove(user);
+
+            await ctx.SaveChangesAsync();
+
+            return true;
         }
     }
 }

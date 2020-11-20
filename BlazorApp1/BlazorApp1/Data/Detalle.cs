@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace BlazorApp1.Data
 {
     public class Detalle
     {
-        public int Iddetalle { get; set; }
+        public int Id { get; set; }
+
         public DateTime Fecha { get; set; }
 
-        public string Tiempo { get; set; }
+        public int Tiempo { get; set; }
 
-        public int Idrecurso { get; set; }
+        public int RecursoId { get; set; }
+
         public Recurso Recurso { get; set; }
-        public int Idtarea { get; set; }
+
+        public int TareaId { get; set; }
+
         public Tareas Tarea { get; set; }
     }
 }

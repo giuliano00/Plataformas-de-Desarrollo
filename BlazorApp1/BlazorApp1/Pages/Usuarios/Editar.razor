@@ -8,7 +8,7 @@
     <ValidationSummary />
 
     <InputText @bind-Value="Modelo.Nombre" />
-    <InputText @bind-Value="Modelo.Apodo" />
+
     <InputText @bind-Value="Modelo.Clave" />
 
     <button type="submit">Guardar</button>
@@ -25,7 +25,7 @@
     {
         if (Id > 0)
         {
-            Modelo = await service.Get(Id);
+            Modelo = await service.SelectUser(Id);
         }
         else
         {
@@ -36,7 +36,8 @@
 
     private async void Guardar()
     {
-        await service.Save(Modelo);
+        await service.SaveUser(Modelo);
+
         navigation.NavigateTo("usuarios/listado");
     }
 }

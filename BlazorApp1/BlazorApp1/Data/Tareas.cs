@@ -8,17 +8,38 @@ namespace BlazorApp1.Data
     public class Tareas
     {
 
-        public int Idtarea { get; set; }
+        public int Id { get; set; }
+
         public string Titulo { get; set; }
 
         public DateTime Vencimiento { get; set; }
 
         public int Estimacion { get; set; }
 
-        public int Idrecurso { get; set; }
+        public int RecursoId { get; set; }
+
         public Recurso Responsable { get; set; }
 
-        public bool Estado { get; set; }
+        public string Estado { get; set; }
+
+
+        public Tareas() 
+        {
+        }
+
+
+        public Tareas(string titulo, DateTime vencimiento, int estimacion, Recurso responsable, string estado)
+        {
+            this.Titulo = titulo;
+
+            this.Vencimiento = vencimiento;
+
+            this.Estimacion = estimacion;
+
+            this.Responsable = responsable;
+
+            this.Estado = estado;
+        }
 
     }
 }

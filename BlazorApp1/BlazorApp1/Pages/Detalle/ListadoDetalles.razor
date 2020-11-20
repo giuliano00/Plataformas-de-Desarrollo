@@ -1,0 +1,73 @@
+﻿@page "/Detalles/ListadoDetalles"
+@using BlazorApp1.Data
+@inject DetalleService DetalleService
+@inject NavigationManager navigation
+@inject IJSRuntime JsRuntime
+
+<h3>Listado Detalles</h3>
+
+<button class="btn btn-primary mb-2 pt-2" @onclick="()=>Editar(0)"><span class="oi oi-plus mr-1"></span>Nuevo</button>
+
+<p>Visualizador de los DEtalles</p>
+
+@if (detalles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Tiempo</th>
+                <th>Recurso</th>
+                <th>Tarea</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in detalles)
+            {
+                <tr>
+                    <td>@detail.Id</td>
+                    <td>@detail.Fecha</td>
+                    <td>@detail.Tiempo</td>
+                    <td>@detail.Recurso.Nombre</td>
+                    <td>@detail.Tarea.Titulo</td>
+                    <td>
+                        <button class="btn btn-info" @onclick="()=>Editar(detail.Id)">Editar</button>
+
+                        <button class="btn btn-danger" @onclick="()=>Borrar(detail.Id)">Borrar</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<BlazorApp1.Data.Detalle> detalles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        detalles = await DetalleService.ListDetail();
+    }
+
+    protected void Editar(int id)
+    {
+        navigation.NavigateTo("Detalles/Editar/" + id);
+    }
+
+    async Task Borrar(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Desea elimiar la Detalle?");
+        if (confirmed)
+        {
+            await DetalleService.DeleteDetail(id);
+            detalles = await DetalleService.ListDetail();
+        }
+    }
+}

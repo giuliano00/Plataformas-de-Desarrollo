@@ -7,29 +7,58 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <li>
-            class="nav-item px-3">
-            <NavLink class="nav-link" href="ListadoUsuarios">
-                <span class="oi oi-home" aria-hidden="true"></span> ListadoUsuarios
+        <li class="nav-item px-3">
+
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="ListarTareas">
-                <span class="oi oi-home" aria-hidden="true"></span> ListarTareas
+
+            <NavLink class="nav-link" href="Usuarios/ListadoUsuarios" Match="NavLinkMatch.All">
+
+                <span class="oi oi-list" aria-hidden="true"></span> Listado de Usuarios
+
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="AgregarTareas">
-                <span class="oi oi-home" aria-hidden="true"></span> AgregarTareas
+
+            <NavLink class="nav-link" href="Tareas/ListadoTareas" Match="NavLinkMatch.All">
+
+                <span class="oi oi-list" aria-hidden="true"></span> Listado de Tareas
+
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="listaRecursos">
-                <span class="oi oi-list" aria-hidden="true"></span> Recursos
+
+            <NavLink class="nav-link" href="Recursos/ListadoRecursos" Match="NavLinkMatch.All">
+
+                <span class="oi oi-list" aria-hidden="true"></span> Listado de Recursos
+
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+
+            <NavLink class="nav-link" href="Detalles/ListadoDetalles" Match="NavLinkMatch.All">
+
+                <span class="oi oi-list" aria-hidden="true"></span> Listado de Detalles
+
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+
+            <NavLink class="nav-link" href="CrearTarea" Match="NavLinkMatch.All">
+
+                <span class="oi oi-plus" aria-hidden="true"></span> Crear Tarea
+
             </NavLink>
         </li>
     </ul>
 </div>
+
+
 
 @code {
     private bool collapseNavMenu = true;

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Text;
 namespace BlazorApp1.Data
 {
     public class Recurso
     {
-        public int Idrecurso { get; set; }
+        public int Id { get; set; }
+
         public string Nombre { get; set; }
-        public int Idusuario { get; set; }
+
+        public int UsuarioId { get; set; }
+
         public Usuario Usuario { get; set; }
     }
 }

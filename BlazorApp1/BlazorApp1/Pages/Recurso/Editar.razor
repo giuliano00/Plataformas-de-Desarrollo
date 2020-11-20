@@ -1,5 +1,70 @@
-﻿<h3>Editar</h3>
+﻿@page "/Recursos/Editar/{id:int}"
+@using BlazorApp1.Data
+@inject RecursoService RecursoService
+@inject NavigationManager navigation
+
+<EditForm Model="@Modelo" OnValidSubmit="@Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <h3 class="my-4">Recurso</h3>
+
+    <div class="container">
+        <div>
+            <div class="mb-3">
+
+                Nombre:
+
+                <InputText @bind-Value="Modelo.Nombre" />
+            </div>
+            <div class="mb-3">
+
+                Usuario:
+
+                <InputSelect class="py-1" @bind-Value="UsuarioId">
+                    <option value="0">Elija un Usuario</option>
+                    @foreach (var item in Usuarios)
+                    {
+                        <option value="@item.UsuarioPK">@item.Nombre</option>
+                    }
+                </InputSelect>
+            </div>
+            <button class="btn btn-primary my-3" type="submit">Guardar</button>
+        </div>
+    </div>
+</EditForm>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
+    public Recurso Modelo { get; set; } = new Recurso();
+
+    public string UsuarioId { get; set; }
+
+    private List<Usuario> Usuarios;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id > 0)
+        {
+            Modelo = await RecursoService.SelectResource(Id);
+
+            UsuarioId = Modelo.UsuarioId.ToString();
+        }
+        else
+        {
+            Modelo = new Recurso();
+        }
+        Usuarios = await RecursoService.GetUser();
+    }
+
+
+    private async void Guardar()
+    {
+        Modelo.UsuarioId = int.Parse(UsuarioId);
+
+        await RecursoService.SaveResource(Modelo);
+
+        navigation.NavigateTo("Recursos/ListadoRecursos");
+    }
 }

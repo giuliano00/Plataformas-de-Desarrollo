@@ -8,15 +8,12 @@ namespace BlazorApp1.Data
 {
     public class Usuario
     {
+        public int UsuarioPK { get; set; }
 
-        public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Apodo { get; set; }
+
         public string Clave { get; set; }
 
-
-        
-        public string ClaveInput { get; set; }
 
     }
 }
