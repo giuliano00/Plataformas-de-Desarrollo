@@ -1,4 +1,4 @@
-﻿@page "/usuarios/editar/{id:int}"
+﻿@page "/Usuarios/editar/{id:int}"
 @using BlazorApp1.Data
 @inject UsuarioService service
 @inject NavigationManager navigation
@@ -6,12 +6,20 @@
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
-
-    <InputText @bind-Value="Modelo.Nombre" />
-
-    <InputText @bind-Value="Modelo.Clave" />
-
-    <button type="submit">Guardar</button>
+    <h3 class="my-4">Tarea</h3>
+    <div class="container">
+        <div>
+            <div class="mb-3">
+                Nombre:
+                <InputText @bind-Value="Modelo.Nombre" />
+            </div>
+            <div class="mb-3">
+                Pass:
+                <InputText @bind-Value="Modelo.Clave" />
+            </div>
+            <button class="btn btn-primary my-3" type="submit">Guardar</button>
+        </div>
+    </div>
 </EditForm>
 
 
@@ -37,7 +45,6 @@
     private async void Guardar()
     {
         await service.SaveUser(Modelo);
-
-        navigation.NavigateTo("usuarios/listado");
+        navigation.NavigateTo("Usuarios/ListadoUsuarios");
     }
 }

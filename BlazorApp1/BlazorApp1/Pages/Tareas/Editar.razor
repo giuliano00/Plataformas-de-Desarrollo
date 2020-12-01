@@ -1,6 +1,7 @@
 ﻿@page "/Tareas/Editar/{id:int}"
 @using BlazorApp1.Data
-@inject TareaService TareaService
+@inject TareasService TareaService
+@inject RecursoService RecursoService
 @inject NavigationManager navigation
 
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
@@ -10,36 +11,30 @@
     <div class="container">
         <div>
             <div class="mb-3">
-
                 Título:
-
                 <InputText @bind-Value="Modelo.Titulo" />
             </div>
             <div class="mb-3">
-
                 Vencimiento:
-
                 <InputDate @bind-Value="Modelo.Vencimiento" />
             </div>
             <div class="mb-3">
-
                 Estimación:
-
                 <InputNumber @bind-Value="Modelo.Estimacion" />
             </div>
             <div class="mb-3">
-
                 Recurso:
-
                 <InputSelect class="p-1" @bind-Value="RecursoId">
-
                     <option value="0">Elija un Recurso</option>
-
                     @foreach (var item in Recursos)
                     {
                         <option value="@item.Id">@item.Nombre</option>
                     }
                 </InputSelect>
+            </div>
+            <div class="mb-3">
+                Estado:
+                <InputText @bind-Value="Modelo.Estado" />
             </div>
             <button class="btn btn-primary my-3" type="submit">Guardar</button>
         </div>
@@ -56,30 +51,28 @@
 
     public string RecursoId { get; set; }
 
-    private List<Recurso> Recursos;
+    private List<Recurso> Recursos = new List<Recurso>();
 
     protected override async Task OnInitializedAsync()
     {
         if (Id > 0)
         {
             Modelo = await TareaService.SelectTask(Id);
-
             RecursoId = Modelo.RecursoId.ToString();
         }
         else
         {
             Modelo = new Tareas();
         }
-        Recursos = await TareaService.GetResource();
+        Recursos = await RecursoService.ListResource();
+
     }
 
 
     private async void Guardar()
     {
         Modelo.RecursoId = int.Parse(RecursoId);
-
         await TareaService.SaveTask(Modelo);
-
         navigation.NavigateTo("Tareas/ListadoTareas");
     }
 }

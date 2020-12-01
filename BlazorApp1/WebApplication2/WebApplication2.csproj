@@ -14,10 +14,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Refit" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorApp1\BlazorApp1.csproj" />
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
   </ItemGroup>
 
 

@@ -28,7 +28,7 @@ namespace BlazorApp1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<TareasDbContext>();
-            services.AddSingleton<TareaService>();
+            services.AddSingleton<TareasService>();
             services.AddSingleton<UsuarioService>();
             services.AddSingleton<DetalleService>();
             services.AddSingleton<RecursoService>();

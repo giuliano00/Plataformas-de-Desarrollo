@@ -1,35 +1,30 @@
 ﻿@page "/Detalles/Editar/{id:int}"
 @using BlazorApp1.Data
 @inject DetalleService DetalleService
+@inject RecursoService RecursoService
+@inject TareasService TareaService
 @inject NavigationManager navigation
 
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
+
     <h3 class="my-4">Detalle</h3>
     <div class="container">
         <div>
             <div class="mb-3">
-
                 Fecha:
-
                 <InputDate @bind-Value="Modelo.Fecha" />
-
             </div>
             <div class="mb-3">
-
                 Tiempo:
-
                 <InputNumber @bind-Value="Modelo.Tiempo" />
-
             </div>
 
+
             <div class="mb-3">
-
                 Recurso:
-
                 <InputSelect class="p-1" @bind-Value="RecursoId">
-
                     <option value="0">Elija un Recurso</option>
                     @foreach (var item in Recursos)
                     {
@@ -38,14 +33,11 @@
                 </InputSelect>
             </div>
 
+
             <div class="mb-3">
-
                 Tarea:
-
                 <InputSelect class="p-1" @bind-Value="TareaId">
-
                     <option value="0">Elija un Recurso</option>
-
                     @foreach (var item in Tareas)
                     {
                         <option value="@item.Id">@item.Titulo</option>
@@ -54,7 +46,6 @@
             </div>
 
             <button class="btn btn-primary my-3" type="submit">Guardar</button>
-
         </div>
     </div>
 </EditForm>
@@ -63,24 +54,17 @@
     [Parameter]
     public int Id { get; set; }
 
-
     public Detalle Modelo { get; set; } = new Detalle();
-
 
     public string RecursoId { get; set; }
 
-
-    private List<Recurso> Recursos;
-
+    private List<Recurso> Recursos = new List<Recurso>();
 
     public string TareaId { get; set; }
 
-
-    private List<Tareas> Tareas;
-
+    private List<Tareas> Tareas = new List<Tareas>();
 
     protected override async Task OnInitializedAsync()
-
     {
         if (Id > 0)
         {
@@ -89,17 +73,14 @@
             RecursoId = Modelo.RecursoId.ToString();
 
             TareaId = Modelo.TareaId.ToString();
-
         }
         else
         {
             Modelo = new Detalle();
-
         }
-        Recursos = await DetalleService.GetResource();
+        Recursos = await RecursoService.ListResource();
 
-        Tareas = await DetalleService.GetTask();
-
+        Tareas = await TareaService.ListTask();
     }
 
 

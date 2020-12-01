@@ -3,56 +3,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Refit;
 namespace BlazorApp1.Data
 {
     public class UsuarioService
     {
-        private TareasDbContext ctx;
-
-        public UsuarioService(TareasDbContext _context)
-        {
-            ctx = _context;
-        }
-
-       
         public async Task<List<Usuario>> ListUser()
         {
-            return await ctx.Usuarios.ToListAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44373/api/");
+            return await remoteService.GetAllUsuario();
         }
 
         public async Task<Usuario> SelectUser(int id)
         {
-            return await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44373/api/");
+            return await remoteService.GetUsuario(id);
         }
 
         public async Task<Usuario> SaveUser(Usuario value)
         {
-            if (value.UsuarioPK == 0)
-            {
-                await ctx.Usuarios.AddAsync(value);
-            }
-            else
-            {
-                ctx.Usuarios.Update(value);
-            }
-
-            await ctx.SaveChangesAsync();
-
-            return value;
-
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44373/api/");
+            return await remoteService.GuardarUsuario(value);
         }
-
 
         public async Task<bool> DeleteUser(int id)
         {
-            Usuario user = await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
-
-            ctx.Usuarios.Remove(user);
-
-            await ctx.SaveChangesAsync();
-
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44373/api/");
+            await remoteService.BorrarUsuario(id);
             return true;
-        }
+        }       
     }
 }

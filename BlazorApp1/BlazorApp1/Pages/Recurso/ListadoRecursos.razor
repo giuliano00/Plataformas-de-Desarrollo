@@ -1,4 +1,5 @@
-﻿@page "/Recursos/ListadoRecursos"
+﻿
+@page "/Recursos/ListadoRecursos"
 @using BlazorApp1.Data
 @inject RecursoService RecursoService
 @inject NavigationManager navigation
@@ -47,7 +48,6 @@ else
     private List<BlazorApp1.Data.Recurso> recursos;
 
     protected override async Task OnInitializedAsync()
-
     {
         recursos = await RecursoService.ListResource();
     }
@@ -60,11 +60,9 @@ else
     async Task Borrar(int id)
     {
         bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Desea elimiar el Recurso?");
-
         if (confirmed)
         {
             await RecursoService.DeleteResource(id);
-
             recursos = await RecursoService.ListResource();
         }
     }
