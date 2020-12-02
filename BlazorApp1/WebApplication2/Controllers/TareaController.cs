@@ -57,7 +57,8 @@ namespace WebApplication2.Controllers
             _context.Tareas.Remove(task);
 
             await _context.SaveChangesAsync();
-
+            //44331 api
+              //  44314blz
             return NoContent();
         }
     }
